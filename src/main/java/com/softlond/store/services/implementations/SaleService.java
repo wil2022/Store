@@ -64,4 +64,9 @@ public class SaleService implements ISaleService {
             return new ResponseEntity<>(false,HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @Override
+    public ResponseEntity<Sale> closeSale(Long sale_id) {
+        return null;
+    }
 }
