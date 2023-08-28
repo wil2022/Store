@@ -28,6 +28,11 @@ public class SaleController {
         return this.saleService.findByDate(date);
     }
 
+    @GetMapping("/list-by-client")
+    public ResponseEntity<List<Sale>> getSalesByClient(@RequestParam Long clientId){
+        return this.saleService.findByClientId(clientId);
+    }
+
 
     @PostMapping("/create")
     public ResponseEntity<Sale> createSale(@RequestBody Sale sale){

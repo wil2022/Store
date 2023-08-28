@@ -87,4 +87,15 @@ public class SaleService implements ISaleService {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @Override
+    public ResponseEntity<List<Sale>> findByClientId(Long client_id) {
+        try{
+            List<Sale> salesByClient = this.saleRepository.findByClientId(client_id);
+            return new ResponseEntity<>(salesByClient, HttpStatus.OK);
+        }catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
 }
