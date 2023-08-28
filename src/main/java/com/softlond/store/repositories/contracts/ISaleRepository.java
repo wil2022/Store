@@ -15,6 +15,6 @@ public interface ISaleRepository extends JpaRepository<Sale, Long> {
 
     List<Sale> findByDate(@Param("date") LocalDate date);
 
-    List<Sale> findByClient(Client client);
+    List<Sale> findByClientId(Long client_id);
 
 }

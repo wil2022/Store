@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -75,5 +76,15 @@ public class SaleService implements ISaleService {
             }else{
                 return new ResponseEntity<>(false,HttpStatus.INTERNAL_SERVER_ERROR);
             }
+    }
+
+    @Override
+    public ResponseEntity<List<Sale>> findByDate(LocalDate date) {
+        try{
+            List<Sale> salesByDate = this.saleRepository.findByDate(date);
+            return new ResponseEntity<>(salesByDate, HttpStatus.OK);
+        }catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

@@ -4,6 +4,7 @@ import com.softlond.store.entities.Client;
 import com.softlond.store.entities.Sale;
 import org.springframework.http.ResponseEntity;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface ISaleService {
@@ -16,6 +17,9 @@ public interface ISaleService {
     ResponseEntity<Boolean> addProductToSale(Long sale_id, Long product_id);
 
     ResponseEntity<Boolean> closeSale(Long sale_id);
+
+    ResponseEntity<List<Sale>> findByDate(LocalDate date);
+
 
 
 }
