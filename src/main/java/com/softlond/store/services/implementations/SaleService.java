@@ -66,7 +66,7 @@ public class SaleService implements ISaleService {
     }
 
     @Override
-    public ResponseEntity<Sale> closeSale(Long sale_id) {
+    public ResponseEntity<Boolean> closeSale(Long sale_id) {
         return null;
     }
 }

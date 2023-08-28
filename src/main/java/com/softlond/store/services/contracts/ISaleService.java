@@ -15,7 +15,7 @@ public interface ISaleService {
 
     ResponseEntity<Boolean> addProductToSale(Long sale_id, Long product_id);
 
-    ResponseEntity<Sale> closeSale(Long sale_id);
+    ResponseEntity<Boolean> closeSale(Long sale_id);
 
 
 }

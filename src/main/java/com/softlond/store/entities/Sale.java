@@ -3,6 +3,7 @@ package com.softlond.store.entities;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
@@ -29,7 +30,7 @@ public class Sale {
     @JsonIgnoreProperties("sales")
     private Set<Product> products = new HashSet<>();
 
-    private Long totalSale;
+    private BigDecimal totalSale;
 
 
 
@@ -67,11 +68,11 @@ public class Sale {
         this.products = products;
     }
 
-    public Long getTotalSale() {
+    public BigDecimal getTotalSale() {
         return totalSale;
     }
 
-    public void setTotalSale(Long totalSale) {
+    public void setTotalSale(BigDecimal totalSale) {
         this.totalSale = totalSale;
     }
 }
