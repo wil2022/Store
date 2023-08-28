@@ -44,29 +44,36 @@ public class SaleService implements ISaleService {
 
     @Override
     public ResponseEntity<Boolean> addProductToSale(Long sale_id, Long product_id) {
-        try {
+
             Sale sale = this.saleRepository.findById(sale_id).orElse(null);
             Product product = this.productRespository.findById(product_id).orElse(null);
 
-            if (sale != null && product != null) {
-                sale.getProducts().add(product);
-                product.getSales().add(sale);
-                saleRepository.save(sale);
-            }
-//             double sum = 0;
-//            for (Product p:sale.getProducts()) {
-//                sum += p.getPrice();
-//
-//            }
-//            sale.setTotalSale(sum);
-            return new ResponseEntity<>(true,HttpStatus.OK);
-        }catch (Exception e){
-            return new ResponseEntity<>(false,HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+                if (sale != null && product != null && sale.getTotalSale() == null) {
+                    sale.getProducts().add(product);
+                    product.getSales().add(sale);
+                    saleRepository.save(sale);
+                    return new ResponseEntity<>(true,HttpStatus.OK);
+                }else {
+                    return new ResponseEntity<>(false, HttpStatus.INTERNAL_SERVER_ERROR);
+                }
     }
 
     @Override
     public ResponseEntity<Boolean> closeSale(Long sale_id) {
-        return null;
+
+            Sale sale = this.saleRepository.findById(sale_id).orElse(null);
+
+            double sum = 0;
+
+            if(sale != null) {
+                for (Product product : sale.getProducts()) {
+                    sum += product.getPrice();
+                }
+                sale.setTotalSale(sum);
+                saleRepository.save(sale);
+                return new ResponseEntity<>(true,HttpStatus.OK);
+            }else{
+                return new ResponseEntity<>(false,HttpStatus.INTERNAL_SERVER_ERROR);
+            }
     }
 }

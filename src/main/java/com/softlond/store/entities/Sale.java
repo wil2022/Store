@@ -30,7 +30,7 @@ public class Sale {
     @JsonIgnoreProperties("sales")
     private Set<Product> products = new HashSet<>();
 
-    private BigDecimal totalSale;
+    private Double totalSale;
 
 
 
@@ -68,11 +68,11 @@ public class Sale {
         this.products = products;
     }
 
-    public BigDecimal getTotalSale() {
+    public Double getTotalSale() {
         return totalSale;
     }
 
-    public void setTotalSale(BigDecimal totalSale) {
+    public void setTotalSale(Double totalSale) {
         this.totalSale = totalSale;
     }
 }
