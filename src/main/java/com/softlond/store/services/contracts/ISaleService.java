@@ -22,5 +22,7 @@ public interface ISaleService {
 
     ResponseEntity<List<Sale>> findByClientId(Long client_id);
 
+    ResponseEntity<List<Sale>> findByClientAndRangeDate(Long client_id, LocalDate startDate, LocalDate endDate);
+
 
 }

@@ -111,4 +111,14 @@ public class SaleService implements ISaleService {
         }
 
     }
+
+    @Override
+    public ResponseEntity<List<Sale>> findByClientAndRangeDate(Long client_id, LocalDate startDate, LocalDate endDate) {
+        try{
+            List<Sale> salesByClientAndDates = this.saleRepository.findByClientAndRangeDate(client_id, startDate, endDate);
+            return new ResponseEntity<>(salesByClientAndDates, HttpStatus.OK);
+        }catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

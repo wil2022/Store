@@ -33,6 +33,11 @@ public class SaleController {
         return this.saleService.findByClientId(clientId);
     }
 
+    @GetMapping("/list-by-client-and-range-dates")
+    public ResponseEntity<List<Sale>> getSalesByClientAndDates(@RequestParam Long clientId, @RequestParam LocalDate startDate, @RequestParam LocalDate endDate){
+        return this.saleService.findByClientAndRangeDate(clientId,startDate,endDate);
+    }
+
 
     @PostMapping("/create")
     public ResponseEntity<Sale> createSale(@RequestBody Sale sale){
