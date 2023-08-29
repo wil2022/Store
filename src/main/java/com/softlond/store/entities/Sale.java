@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -21,14 +22,20 @@ public class Sale {
     @JsonIgnoreProperties("sales")
     private Client client;
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "sale")
+    @JsonIgnoreProperties({"id","sale"})
+    private Set<SaleProduct> products;
+
 //    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "sales")
 //    @JsonIgnoreProperties("sale")
 //    private List<Product> products;
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(name = "sale_product", joinColumns = @JoinColumn(name = "sale_id"),
-                inverseJoinColumns = @JoinColumn(name = "product_id"))
-    @JsonIgnoreProperties("sales")
-    private Set<Product> products = new HashSet<>();
+
+
+//    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+//    @JoinTable(name = "sale_product", joinColumns = @JoinColumn(name = "sale_id"),
+//                inverseJoinColumns = @JoinColumn(name = "product_id"))
+//    @JsonIgnoreProperties("sales")
+//    private Set<Product> products = new HashSet<>();
 
     private Double totalSale;
 
@@ -60,11 +67,11 @@ public class Sale {
         this.client = client;
     }
 
-    public Set<Product> getProducts() {
+    public Set<SaleProduct> getProducts() {
         return products;
     }
 
-    public void setProducts(Set<Product> products) {
+    public void setProducts(Set<SaleProduct> products) {
         this.products = products;
     }
 

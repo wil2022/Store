@@ -1,5 +1,6 @@
 package com.softlond.store.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
@@ -22,14 +23,18 @@ public class Product {
     @JsonIgnoreProperties("products")
     private Category category;
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "product")
+    @JsonIgnore
+    private Set<SaleProduct> sales;
+
 //    @ManyToMany
 //    @JoinColumn(name = "sale_id")
 //    @JsonIgnoreProperties("products")
 //    private List<Sale> sales;
 
-    @ManyToMany(mappedBy = "products")
-    @JsonIgnoreProperties("products")
-    public Set<Sale> sales = new HashSet<>();
+//    @ManyToMany(mappedBy = "products")
+//    @JsonIgnoreProperties("products")
+//    public Set<Sale> sales = new HashSet<>();
 
 
 
@@ -68,11 +73,19 @@ public class Product {
         this.category = category;
     }
 
-    public Set<Sale> getSales() {
+//    public Set<SaleProduct> getSaleProducts() {
+//        return saleProducts;
+//    }
+//
+//    public void setSaleProducts(Set<SaleProduct> saleProducts) {
+//        this.saleProducts = saleProducts;
+//    }
+
+    public Set<SaleProduct> getSales() {
         return sales;
     }
 
-    public void setSales(Set<Sale> sales) {
+    public void setSales(Set<SaleProduct> sales) {
         this.sales = sales;
     }
 

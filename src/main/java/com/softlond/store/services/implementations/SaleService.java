@@ -2,7 +2,9 @@ package com.softlond.store.services.implementations;
 
 import com.softlond.store.entities.Product;
 import com.softlond.store.entities.Sale;
+import com.softlond.store.entities.SaleProduct;
 import com.softlond.store.repositories.contracts.IProductRespository;
+import com.softlond.store.repositories.contracts.ISaleProductRepository;
 import com.softlond.store.repositories.contracts.ISaleRepository;
 import com.softlond.store.services.contracts.ISaleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,9 @@ public class SaleService implements ISaleService {
 
     @Autowired
     private IProductRespository productRespository;
+
+    @Autowired
+    private ISaleProductRepository saleProductRepository;
 
     @Override
     public ResponseEntity<List<Sale>> findAll() {
@@ -48,11 +53,19 @@ public class SaleService implements ISaleService {
 
             Sale sale = this.saleRepository.findById(sale_id).orElse(null);
             Product product = this.productRespository.findById(product_id).orElse(null);
+            SaleProduct product1 = new SaleProduct();
 
                 if (sale != null && product != null && sale.getTotalSale() == null) {
-                    sale.getProducts().add(product);
-                    product.getSales().add(sale);
-                    saleRepository.save(sale);
+
+                    product1.setSale(sale);
+                    product1.setProduct(product);
+                    product1.setPriceProduct(product.getPrice());
+
+                    sale.getProducts().add(product1);
+                    product.getSales().add(product1);
+
+                    saleProductRepository.save(product1);
+
                     return new ResponseEntity<>(true,HttpStatus.OK);
                 }else {
                     return new ResponseEntity<>(false, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -67,8 +80,8 @@ public class SaleService implements ISaleService {
             double sum = 0;
 
             if(sale != null) {
-                for (Product product : sale.getProducts()) {
-                    sum += product.getPrice();
+                for (SaleProduct product : sale.getProducts()) {
+                    sum += product.getPriceProduct();
                 }
                 sale.setTotalSale(sum);
                 saleRepository.save(sale);
