@@ -2,7 +2,13 @@ package com.softlond.store.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Setter
+@Getter
+@NoArgsConstructor
 @Entity
 @Table(name = "sale_product")
 public class SaleProduct {
@@ -23,38 +29,5 @@ public class SaleProduct {
 
     private double priceProduct;
 
-    public SaleProduct() {
-    }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Sale getSale() {
-        return sale;
-    }
-
-    public void setSale(Sale sale) {
-        this.sale = sale;
-    }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-
-    public double getPriceProduct() {
-        return priceProduct;
-    }
-
-    public void setPriceProduct(double priceProduct) {
-        this.priceProduct = priceProduct;
-    }
 }

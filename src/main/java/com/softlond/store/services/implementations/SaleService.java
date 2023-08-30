@@ -8,6 +8,7 @@ import com.softlond.store.repositories.contracts.ISaleProductRepository;
 import com.softlond.store.repositories.contracts.ISaleRepository;
 import com.softlond.store.services.contracts.ISaleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -78,12 +79,24 @@ public class SaleService implements ISaleService {
             Sale sale = this.saleRepository.findById(sale_id).orElse(null);
 
             double sum = 0;
+            double discount = 0;
 
             if(sale != null) {
                 for (SaleProduct product : sale.getProducts()) {
                     sum += product.getPriceProduct();
                 }
-                sale.setTotalSale(sum);
+
+                LocalDate newDate = sale.getDate().minusDays(31);
+
+                for (Sale sales : sale.getClient().getSales()) {
+                    if(sales.getTotalSale() != null && sales.getTotalSale() > 1000000
+                            && sales.getDate().isEqual(newDate) || sales.getDate().isAfter(newDate)){
+                        discount = sum * ((double) 20 /100);
+                        break;
+                    }
+
+                }
+                sale.setTotalSale(sum - discount);
                 saleRepository.save(sale);
                 return new ResponseEntity<>(true,HttpStatus.OK);
             }else{
