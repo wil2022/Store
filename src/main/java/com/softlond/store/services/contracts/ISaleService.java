@@ -16,7 +16,7 @@ public interface ISaleService {
 
     ResponseEntity<Boolean> addProductToSale(Long sale_id, Long product_id);
 
-    ResponseEntity<Boolean> closeSale(Long sale_id);
+    ResponseEntity<Boolean> closeSale(Long sale_id, double discount);
 
     ResponseEntity<List<Sale>> findByDate(LocalDate date);
 

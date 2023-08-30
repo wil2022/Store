@@ -52,8 +52,8 @@ public class SaleController {
     }
 
     @PostMapping("/close-sale")
-    public ResponseEntity<Boolean> closeSale(@RequestParam Long saleId){
-        return this.saleService.closeSale(saleId);
+    public ResponseEntity<Boolean> closeSale(@RequestParam Long saleId, @RequestParam double discount){
+        return this.saleService.closeSale(saleId, discount);
     }
 
 

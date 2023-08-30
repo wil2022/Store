@@ -74,14 +74,15 @@ public class SaleService implements ISaleService {
     }
 
     @Override
-    public ResponseEntity<Boolean> closeSale(Long sale_id) {
+    public ResponseEntity<Boolean> closeSale(Long sale_id,double discount) {
 
             Sale sale = this.saleRepository.findById(sale_id).orElse(null);
 
             double sum = 0;
-            double discount = 0;
+            double totalDiscount = 0;
 
             if(sale != null) {
+                //sale.setDiscount(discount);
                 for (SaleProduct product : sale.getProducts()) {
                     sum += product.getPriceProduct();
                 }
@@ -92,14 +93,14 @@ public class SaleService implements ISaleService {
 
                     if(sales.getTotalSale() != null && sales.getTotalSale() > 1000000
                             && (sales.getDate().isEqual(newDate) || sales.getDate().isAfter(newDate))){
-                        discount = sum * (sale.getDiscount() /100);
+                        totalDiscount = sum * (discount /100);
                         break;
                     }
 
                 }
-                sale.setDiscount(discount);
+                sale.setDiscount(totalDiscount);
                 sale.setSubtotal(sum);
-                sale.setTotalSale(sum - discount);
+                sale.setTotalSale(sum - totalDiscount);
                 saleRepository.save(sale);
                 return new ResponseEntity<>(true,HttpStatus.OK);
             }else{
