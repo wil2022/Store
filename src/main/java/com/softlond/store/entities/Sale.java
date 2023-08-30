@@ -32,8 +32,8 @@ public class Sale {
     @JsonIgnoreProperties({"id","sale"})
     private Set<SaleProduct> products;
 
-    //private Double subtotal;
-    //private Double discount;
+    private Double subtotal;
+    private Double discount;
     private Double totalSale;
 
 

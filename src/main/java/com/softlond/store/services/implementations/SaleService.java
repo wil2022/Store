@@ -89,13 +89,16 @@ public class SaleService implements ISaleService {
                 LocalDate newDate = sale.getDate().minusDays(31);
 
                 for (Sale sales : sale.getClient().getSales()) {
+
                     if(sales.getTotalSale() != null && sales.getTotalSale() > 1000000
-                            && sales.getDate().isEqual(newDate) || sales.getDate().isAfter(newDate)){
-                        discount = sum * ((double) 20 /100);
+                            && (sales.getDate().isEqual(newDate) || sales.getDate().isAfter(newDate))){
+                        discount = sum * (sale.getDiscount() /100);
                         break;
                     }
 
                 }
+                sale.setDiscount(discount);
+                sale.setSubtotal(sum);
                 sale.setTotalSale(sum - discount);
                 saleRepository.save(sale);
                 return new ResponseEntity<>(true,HttpStatus.OK);
