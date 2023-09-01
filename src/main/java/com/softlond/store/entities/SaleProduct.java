@@ -24,10 +24,13 @@ public class SaleProduct {
 
     @ManyToOne
     @JoinColumn(name = "product_id")
-    @JsonIgnoreProperties({"sales","price","category"})
+    @JsonIgnoreProperties({"sales","category"})
     private Product product;
 
-    private double priceProduct;
+
+    private Integer units;
+
+    private Double priceTotalProduct;
 
 
 }

@@ -46,9 +46,9 @@ public class SaleController {
     }
 
     @PostMapping("/add-product")
-    public ResponseEntity<Boolean> addProductToSale(@RequestParam Long saleId, @RequestParam Long productId) {
+    public ResponseEntity<Boolean> addProductToSale(@RequestParam Long saleId, @RequestParam Long productId, @RequestParam int units) {
 
-       return this.saleService.addProductToSale(saleId,productId);
+       return this.saleService.addProductToSale(saleId,productId,units);
     }
 
     @PostMapping("/close-sale")
