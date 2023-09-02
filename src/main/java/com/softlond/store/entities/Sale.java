@@ -25,11 +25,11 @@ public class Sale {
     private LocalDate date;
     @ManyToOne
     @JoinColumn(name = "client_id")
-    @JsonIgnoreProperties("sales")
+    @JsonIgnoreProperties({"sales"})
     private Client client;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "sale")
-    @JsonIgnoreProperties({"id","sale"})
+    @JsonIgnoreProperties("sale")
     private Set<SaleProduct> products;
 
     private Double subtotal;

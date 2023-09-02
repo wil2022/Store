@@ -56,5 +56,14 @@ public class SaleController {
         return this.saleService.closeSale(saleId);
     }
 
+    @DeleteMapping("/delete")
+    public ResponseEntity<Boolean> deleteSale(@RequestParam Long saleId){
+        return this.saleService.deleteSale(saleId);
+    }
+
+    @DeleteMapping("/delete-product-to-sale")
+    public ResponseEntity<Boolean> deleteProductToSale(@RequestParam Long productSaleId){
+        return this.saleService.deleteProductToSale(productSaleId);
+    }
 
 }

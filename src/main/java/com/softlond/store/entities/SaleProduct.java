@@ -24,7 +24,7 @@ public class SaleProduct {
 
     @ManyToOne
     @JoinColumn(name = "product_id")
-    @JsonIgnoreProperties({"sales","category"})
+    @JsonIgnoreProperties({"id","sales","category"})
     private Product product;
 
 

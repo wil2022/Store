@@ -12,7 +12,9 @@ public interface ISaleService {
     ResponseEntity<List<Sale>> findAll();
     ResponseEntity<Sale> create(Sale sale);
    // ResponseEntity<Sale> update(Sale sale);
-   // ResponseEntity<Boolean> delete(Long id);
+    ResponseEntity<Boolean> deleteSale(Long id);
+
+    ResponseEntity<Boolean> deleteProductToSale(Long id);
 
     ResponseEntity<Boolean> addProductToSale(Long sale_id, Long product_id, int units);
 

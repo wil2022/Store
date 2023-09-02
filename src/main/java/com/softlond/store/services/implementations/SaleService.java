@@ -50,6 +50,33 @@ public class SaleService implements ISaleService {
     }
 
     @Override
+    public ResponseEntity<Boolean> deleteSale(Long sale_id) {
+
+            Sale sale = this.saleRepository.findById(sale_id).orElse(null);
+
+            if(sale != null && sale.getTotalSale() == null){
+                this.saleRepository.deleteById(sale_id);
+                return new ResponseEntity<>(true, HttpStatus.OK);
+            }else {
+                return new ResponseEntity<>(false, HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+
+    }
+
+    @Override
+    public ResponseEntity<Boolean> deleteProductToSale(Long id) {
+
+            SaleProduct saleProduct = this.saleProductRepository.findById(id).orElse(null);
+
+            if(saleProduct != null && saleProduct.getSale().getTotalSale() == null){
+                this.saleProductRepository.deleteById(id);
+                return new ResponseEntity<>(true, HttpStatus.OK);
+            }else {
+                return new ResponseEntity<>(false, HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+    }
+
+    @Override
     public ResponseEntity<Boolean> addProductToSale(Long sale_id, Long product_id, int units) {
 
             Sale sale = this.saleRepository.findById(sale_id).orElse(null);
