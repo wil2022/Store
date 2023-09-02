@@ -110,7 +110,7 @@ public class SaleService implements ISaleService {
             double discount = 0;
             double discount2;
 
-            if(sale != null) {
+            if(sale != null && sale.getTotalSale() == null) {
                 for (SaleProduct product : sale.getProducts()) {
                     sum += product.getPriceTotalProduct();
                 }
