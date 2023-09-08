@@ -19,8 +19,8 @@ public class ClientService implements IClientService {
     @Override
     public ResponseEntity<List<Client>> findAll() {
         try{
-            List<Client> clients = this.clientRepository.findAll();
-            return new ResponseEntity<>(clients, HttpStatus.OK);
+            List<Client> userEntities = this.clientRepository.findAll();
+            return new ResponseEntity<>(userEntities, HttpStatus.OK);
         }catch (Exception e){
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }

@@ -1,6 +1,5 @@
 package com.softlond.store.services.contracts;
 
-import com.softlond.store.entities.Category;
 import com.softlond.store.entities.Client;
 import org.springframework.http.ResponseEntity;
 

@@ -1,9 +1,6 @@
 package com.softlond.store.repositories.contracts;
 
-import com.softlond.store.entities.Client;
-import com.softlond.store.entities.Product;
 import com.softlond.store.entities.Sale;
-import org.springframework.cglib.core.Local;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
